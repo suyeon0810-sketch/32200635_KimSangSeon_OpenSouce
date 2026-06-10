@@ -1,0 +1,12 @@
+서버 실행 방법
+
+명령 프롬프트 진입
+
+cd /mnt/d/opensoure/singing-coach-server/app
+
+source venv/bin/activate
+
+서버 프로그램 실행
+
+http://localhost:8000 하여 서버 확인
+

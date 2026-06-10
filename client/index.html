@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노래 코칭 프로그램</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+
+        <header class="top-header">
+            <div>
+                <p class="project-label">Singing Coach Client</p>
+                <h1>노래 코칭 프로그램</h1>
+            </div>
+            <img
+                class="header-image"
+                src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80"
+                alt="microphone">
+        </header>
+
+        <section id="uploadPage" class="page active">
+            <section class="panel upload-panel">
+                <div class="section-title-row">
+                    <h2>분석 파일 업로드</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="upload-grid">
+                    <label class="file-card" for="originalFile">
+                        <img src="assets/original-file-card.png" alt="original audio">
+                        <div>
+                            <strong>원곡 파일</strong>
+                            <p id="originalFileName">파일을 선택하세요</p>
+                        </div>
+                    </label>
+                    <input type="file" id="originalFile" accept="audio/*">
+
+                    <label class="file-card" for="userFile">
+                        <img src="assets/user-recording-card.png" alt="user recording">
+                        <div>
+                            <strong>사용자 녹음 파일</strong>
+                            <p id="userFileName">파일을 선택하세요</p>
+                        </div>
+                    </label>
+                    <input type="file" id="userFile" accept="audio/*">
+                </div>
+
+                <button id="uploadButton">분석 요청</button>
+            </section>
+        </section>
+
+        <section id="serverPage" class="page">
+            <section class="panel">
+                <div class="section-title-row">
+                    <h2>서버 확인</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="server-status-box">
+                    <div class="status-row">
+                        <span>원곡 파일 전송</span>
+                        <strong id="originalStatus">대기</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>사용자 녹음 파일 전송</span>
+                        <strong id="userStatus">대기</strong>
+                    </div>
+                    <div class="status-row">
+                        <span>서버 응답</span>
+                        <strong id="serverStatus">대기</strong>
+                    </div>
+                </div>
+
+                <button id="goLiveButton">실시간 비교 시작</button>
+                <button class="ghost-button" data-page="uploadPage">이전</button>
+            </section>
+        </section>
+
+        <section id="livePage" class="page">
+            <section class="panel graph-panel">
+                <div class="section-title-row">
+                    <h2>실시간 원곡 비교</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="graph-stage">
+                    <div class="graph-legend">
+                        <div class="legend-item">
+                            <span class="legend-line original"></span>
+                            <span>원곡</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-line user"></span>
+                            <span>사용자</span>
+                        </div>
+                    </div>
+
+                    <div class="graph-score">
+                        <span>종합 점수</span>
+                        <strong id="liveTotalScore">--</strong>
+                    </div>
+
+                    <div class="graph-placeholder">
+                        <div class="original-pitch-line"></div>
+                        <div class="user-pitch-line"></div>
+                        <p>원곡 피치 그래프 위에 사용자 피치 그래프가 실시간으로 표시될 영역</p>
+                    </div>
+                </div>
+
+                <div class="score-strip">
+                    <div>
+                        <span>피치</span>
+                        <strong id="livePitchScore">--</strong>
+                    </div>
+                    <div>
+                        <span>음정</span>
+                        <strong id="liveToneScore">--</strong>
+                    </div>
+                </div>
+
+                <div class="feedback-panel">
+                    <h3>실시간 코칭 피드백</h3>
+                    <p id="pitchFeedback">추후 음정과 피치에 대한 실시간 피드백이 표시될 영역입니다.</p>
+                </div>
+
+                <button id="goRhythmButton">박자 분석으로 이동</button>
+                <button class="ghost-button" data-page="serverPage">이전</button>
+            </section>
+        </section>
+
+        <section id="rhythmPage" class="page">
+            <section class="panel graph-panel">
+                <div class="section-title-row">
+                    <h2>박자 분석</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="rhythm-stage">
+                    <div class="timeline-placeholder">
+                        <div class="beat-grid"></div>
+                        <p>원곡 박자와 사용자 박자 타이밍 차이가 표시될 영역</p>
+                    </div>
+                </div>
+
+                <div class="score-strip single">
+                    <div>
+                        <span>박자</span>
+                        <strong id="rhythmScore">--</strong>
+                    </div>
+                </div>
+
+                <div class="feedback-panel">
+                    <h3>박자 피드백</h3>
+                    <p id="rhythmFeedback">추후 박자 빠름, 느림, 싱크 차이에 대한 피드백이 표시될 영역입니다.</p>
+                </div>
+
+                <button id="goFinalButton">최종 결과 보기</button>
+                <button class="ghost-button" data-page="livePage">이전</button>
+            </section>
+        </section>
+
+        <section id="finalPage" class="page">
+            <section class="panel">
+                <div class="section-title-row">
+                    <h2>최종 결과</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="final-score-box">
+                    <span>최종 종합 점수</span>
+                    <strong id="finalTotalScore">--</strong>
+                </div>
+
+                <div class="result-grid">
+                    <div>
+                        <span>피치</span>
+                        <strong id="finalPitchScore">--</strong>
+                    </div>
+                    <div>
+                        <span>음정</span>
+                        <strong id="finalToneScore">--</strong>
+                    </div>
+                    <div>
+                        <span>박자</span>
+                        <strong id="finalRhythmScore">--</strong>
+                    </div>
+                </div>
+
+                <div class="final-feedback-box">
+                    <h3>최종 피드백</h3>
+                    <p id="finalFeedback">추후 최종 점수에 맞는 종합 코칭 피드백이 표시될 영역입니다.</p>
+                </div>
+
+                <div class="wrong-section-box">
+                    <h3>가장 많이 틀린 구간</h3>
+                    <p id="wrongSection">추후 가장 많이 틀린 구간의 시간, 원인, 연습 목표가 표시될 영역입니다.</p>
+                </div>
+
+                <button id="goPracticeUploadButton">틀린 구간 다시 연습하기</button>
+                <button id="goHomeButton" class="ghost-button">처음으로</button>
+                <button class="ghost-button" data-page="rhythmPage">이전</button>
+            </section>
+        </section>
+
+        <section id="practiceUploadPage" class="page">
+            <section class="panel upload-panel">
+                <div class="section-title-row">
+                    <h2>재녹음 파일 업로드</h2>
+                    <span class="line"></span>
+                </div>
+
+                <div class="practice-context">
+                    <p id="practiceContextText">추후 가장 많이 틀린 구간 정보가 표시될 영역입니다.</p>
+                </div>
+
+                <label class="file-card single-card" for="practiceFile">
+                    <img src="assets/user-recording-card.png" alt="practice recording">
+                    <div>
+                        <strong>재녹음 파일</strong>
+                        <p id="practiceFileName">파일을 선택하세요</p>
+                    </div>
+                </label>
+                <input type="file" id="practiceFile" accept="audio/*">
+
+                <button id="restartAnalyzeButton">재분석 요청</button>
+                <button class="ghost-button" data-page="finalPage">이전</button>
+            </section>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
