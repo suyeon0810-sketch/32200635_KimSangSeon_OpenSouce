@@ -1,1 +1,46 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# =========================
+# Virtual Environment
+# =========================
+venv/
+singing-coach-server/app/venv/
+.env
+
+# =========================
+# Session / Runtime Data
+# =========================
+sessions/
+singing-coach-server/sessions/
+
+# =========================
+# Audio Files
+# =========================
+*.wav
+*.mp3
+*.flac
+
+# =========================
+# Result Files
+# =========================
+result.json
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+**/.DS_Store
+__MACOSX/
+._*
 .DS_Store

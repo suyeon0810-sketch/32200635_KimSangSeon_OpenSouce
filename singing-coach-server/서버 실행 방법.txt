@@ -1,0 +1,16 @@
+서버 실행 방법
+
+명령 프롬프트 진입
+
+wsl
+
+cd /mnt/d/opensoure/singing-coach-server/app
+
+source venv/bin/activate
+
+cd ..
+
+서버 프로그램 실행 : uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+http://localhost:8000 하여 서버 확인
+
